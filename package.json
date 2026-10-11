@@ -1,0 +1,6 @@
+{
+  "name": "calmean-ha-ui-tests",
+  "private": true,
+  "scripts": {"test": "node tests/frontend/test-panel.cjs"},
+  "devDependencies": {"jsdom": "26.1.0"}
+}
