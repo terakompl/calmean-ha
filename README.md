@@ -1,47 +1,12 @@
 # CALMEAN → Home Assistant
 
-**0.2.3 beta — mapa CALMEAN i strefy osobno dla każdego zegarka.**
+**1.0.0 — mapa CALMEAN i strefy osobno dla każdego zegarka.**
 Nieoficjalna integracja społecznościowa. Instalacja i konfiguracja bez YAML.
 
 ![Ikona integracji](custom_components/calmean/brand/icon.png)
 
 Specyfikacja: [wymagania](docs/SPECYFIKACJA.md).
 Publikacja: [GitHub i HACS krok po kroku](docs/PUBLIKACJA_GITHUB_HACS.md).
-
-## Poprawka 0.2.3
-
-- Dodawanie stref działa również przez lokalny adres HTTP: identyfikator nie
-  wymaga już dostępnego wyłącznie przez HTTPS `crypto.randomUUID()`.
-- Obrazy OSM używają `strict-origin-when-cross-origin`, wysyłając rzeczywisty
-  origin strony zamiast przejmować restrykcyjną politykę odsyłacza HA.
-  Nie podszywamy się pod inne strony i nie obchodzimy blokad przez proxy.
-- Sieciowe błędy kafelków nie blokują formularza; pojawia się informacja.
-- Przy braku pozycji zegarka mapa może zacząć od strefy Dom skonfigurowanej w HA.
-- Brak współrzędnych API jest opisany oddzielnie od niedostępnego tła.
-
-Jeśli po aktualizacji nadal widać kafelki „403 Access blocked”, potrzebne jest
-sprawdzenie faktycznego nagłówka Referer i powodu blokady OSM w przeglądarce.
-Poprawna polityka odsyłacza nie gwarantuje zniesienia innych blokad dostawcy.
-Nie oznacza to błędnego tokenu CALMEAN. Jeśli API nie zwraca localization, pozycja pozostaje nieznana.
-Nie zgadujemy struktury odpowiedzi na podstawie pustych pól interfejsu.
-
-## Aktualizacja z 0.1.0 lub 0.2.0
-
-1. Rozpakuj paczkę. Skopiuj cały katalog `custom_components/calmean` do
-   `/config/custom_components/calmean`, zastępując pliki wcześniejszej wersji.
-   Skopiuj także nowy podfolder **frontend**.
-2. Uruchom ponownie Home Assistant, potem odśwież przeglądarkę **Ctrl + F5**.
-3. Nie usuwaj istniejącej integracji: konto, token i identyfikatory encji zostają.
-4. W menu bocznym pojawi się **Mapa CALMEAN**. Otwórz ją jako administrator HA.
-5. Dotychczasowy wspólny Dom i Szkoła zostaną skopiowane do każdego zegarka
-   widocznego przy pierwszym uruchomieniu nowej wersji. Można je dalej zmieniać
-   niezależnie. Nowo dodane zegarki zaczynają bez stref.
-
-**Zmiana stanów sensora Miejsce:** teraz zwraca dokładną nazwę dopasowanej
-strefy, np. `Dom`, `Szkoła`, `Dziadkowie`, a poza nimi `Poza domem`.
-Automatyzacje używające starych surowych stanów `home`, `school`, `away`
-w tym sensorze trzeba zmienić. Tracker zachowuje `home` dla strefy typu Dom,
-`not_home` poza strefami; pozostałe strefy zwracają własną nazwę.
 
 ## Mapa i własne strefy
 
@@ -99,8 +64,6 @@ z HA, nie wywołuje dodatkowo API CALMEAN. Nowe zegarki są wykrywane automatycz
 4. Otwórz **Headers → Request Headers** i skopiuj wartość **authorization**.
 5. Wklej `Bearer TWOJ_TOKEN` lub sam token do konfiguracji CALMEAN w HA.
 
-Nie publikuj tokenu ani zrzutów nagłówków. Po jego wygaśnięciu pobierz nowy
-i wykonaj ponowne uwierzytelnienie integracji.
 
 ## Encje
 
