@@ -2,10 +2,13 @@
 from datetime import timedelta
 from homeassistant.components import frontend
 from homeassistant.helpers.aiohttp_client import async_get_clientsession
+from homeassistant.helpers import config_validation as cv
 from .const import DOMAIN, DEFAULT_INTERVAL, PLATFORMS
 from .coordinator import CalmeanCoordinator
 from .models import migrate_shared_zones
 from .panel import PANEL_PATH, async_setup_panel_api, async_add_map_panel
+
+CONFIG_SCHEMA = cv.config_entry_only_config_schema(DOMAIN)
 
 async def async_setup(hass, config):
     await async_setup_panel_api(hass)

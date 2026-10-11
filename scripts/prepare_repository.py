@@ -16,5 +16,6 @@ data = json.loads(path.read_text())
 data['documentation'] = f'https://github.com/{args.owner}/{args.repository}'
 data['issue_tracker'] = data['documentation'] + '/issues'
 data['codeowners'] = ['@' + (args.maintainer or args.owner)]
-path.write_text(json.dumps(data, indent=2) + '\n')
+keys = ['domain', 'name'] + sorted(set(data) - {'domain', 'name'})
+path.write_text(json.dumps({key: data[key] for key in keys}, indent=2) + '\n')
 print('Public repository metadata updated.')

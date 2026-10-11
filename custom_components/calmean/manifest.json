@@ -1,20 +1,20 @@
 {
   "domain": "calmean",
   "name": "CALMEAN",
-  "version": "0.2.1",
-  "config_flow": true,
-  "documentation": "https://github.com/terakompl/calmean-ha",
-  "issue_tracker": "https://github.com/terakompl/calmean-ha/issues",
   "codeowners": [
     "@terakompl"
   ],
-  "iot_class": "cloud_polling",
-  "integration_type": "hub",
-  "requirements": [],
+  "config_flow": true,
   "dependencies": [
     "frontend",
     "http",
     "panel_custom",
     "websocket_api"
-  ]
+  ],
+  "documentation": "https://github.com/terakompl/calmean-ha",
+  "integration_type": "hub",
+  "iot_class": "cloud_polling",
+  "issue_tracker": "https://github.com/terakompl/calmean-ha/issues",
+  "requirements": [],
+  "version": "0.2.1"
 }
