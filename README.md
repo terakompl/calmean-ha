@@ -34,14 +34,14 @@ jest nad formularzem. Klawiatura: strzałki przesuwają, plus/minus zmienia zoom
 Widok nie zawiera historii tras; standardowa karta Mapa HA może ją pokazywać
 na podstawie zapisanej historii trackera.
 
-Strefy są wewnętrzne dla integracji i nie tworzą globalnych encji `zone.\*`.
+Strefy są wewnętrzne dla integracji i nie tworzą globalnych encji `zone.\\\*`.
 Dzięki temu dwa zegarki mogą mieć różne szkoły, nazwy i promienie.
 Po usunięciu wszystkich stref danego zegarka jego tracker korzysta ze
 standardowych stref HA; sensor Miejsce opisuje wyłącznie strefy CALMEAN.
 
 ## Pierwsza instalacja
 
-1. Skopiuj `custom\_components/calmean` do `/config/custom\_components/calmean`.
+1. Skopiuj `custom\\\_components/calmean` do `/config/custom\\\_components/calmean`.
 2. Uruchom ponownie HA i odśwież przeglądarkę.
 3. Ustawienia → Urządzenia i usługi → Dodaj integrację → **CALMEAN**.
 4. Wklej token własnego konta; można wkleić sam token lub `Bearer TOKEN`.
@@ -62,10 +62,7 @@ z HA, nie wywołuje dodatkowo API CALMEAN. Nowe zegarki są wykrywane automatycz
 2. Naciśnij **F12**, otwórz **Network / Sieć** i odśwież stronę.
 3. W filtrze wpisz **getAllDevice** i wybierz pasujące żądanie.
 4. Otwórz **Headers → Request Headers** i skopiuj wartość **authorization**.
-5. Wklej `Bearer TWOJ\_TOKEN` lub sam token do konfiguracji CALMEAN w HA.
-
-Nie publikuj tokenu ani zrzutów nagłówków. Po jego wygaśnięciu pobierz nowy
-i wykonaj ponowne uwierzytelnienie integracji.
+5. Wklej `Bearer TWOJ\\\_TOKEN` lub sam token do konfiguracji CALMEAN w HA.
 
 ## Encje
 
@@ -88,7 +85,7 @@ a nie fałszywe „offline” zegarka.
 Przed publikacją ustaw właściciela i repozytorium:
 
 ```sh
-python scripts/prepare\_repository.py terakompl --repository calmean-ha
+python scripts/prepare\\\_repository.py terakompl --repository calmean-ha
 ```
 
 Skrypt ustawia publiczne adresy oraz codeowner w `manifest.json`. Nie przyjmuje
@@ -119,7 +116,7 @@ OpenStreetMap. Mapa używa projekcji Web Mercator, ograniczonej do ±85,0511°.
 
 ## API i ograniczenia bety
 
-Endpoint: `POST https://apiwww.calmean.com/t/calmean.com/wwwview/1.0.0/getAllDevicesView?controlProfiles=true\&sharedProfiles=true`.
+Endpoint: `POST https://apiwww.calmean.com/t/calmean.com/wwwview/1.0.0/getAllDevicesView?controlProfiles=true\\\&sharedProfiles=true`.
 Autoryzacja Bearer, standardowa walidacja HTTPS, timeout 20 s, brak przekierowań.
 Nie implementujemy niepotwierdzonego logowania hasłem ani automatycznego
 odświeżania tokenu. HTTP 401/403 uruchamia ponowne uwierzytelnienie.
@@ -136,10 +133,10 @@ ISO 8601 ze strefą. Czas bez strefy i brak współrzędnych pozostają nieznane
 ```sh
 python -m pip install -r requirements-test.txt
 python -m unittest discover -s tests -v
-python -m compileall -q custom\_components
+python -m compileall -q custom\\\_components
 npm install
 npm test
-node --check custom\_components/calmean/frontend/calmean-map.js
+node --check custom\\\_components/calmean/frontend/calmean-map.js
 ```
 
 31 testów Python obejmuje normalizację, klienta HTTP, promień 50 m, niezależność
