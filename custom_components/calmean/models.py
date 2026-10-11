@@ -54,35 +54,43 @@ class Device:
         return self.latitude is not None and self.longitude is not None
 
 def parse_devices(payload):
-    """Accept a list or nested wrappers containing flat device records.
+    """Accept verified deviceView records and legacy flat device records.
 
     Unknown nonempty structures fail explicitly, rather than presenting no devices.
-    Nested location records require a verified schema before adding adapters.
+    deviceView uses nested localization and battery fractions in [0, 1].
     """
     result = {}
-    def visit(node):
+    def visit(node, device_view=False):
         if isinstance(node, list):
             for item in node:
-                visit(item)
+                visit(item, device_view)
         elif isinstance(node, dict):
             if "deviceId" in node:
+                if node.get("deviceType") == "DEVICE_PARENT" or node.get("presentationGroup") == "PARENT_APP":
+                    return
                 identifier = node["deviceId"]
                 if identifier is None or isinstance(identifier, (dict, list, bool)) or not str(identifier).strip():
                     raise InvalidResponse("Invalid device identifier")
                 identifier = str(identifier)
+                location = node.get("localization") if "localization" in node else node
+                if not isinstance(location, dict):
+                    location = {}
+                battery = number(node.get("battery"), 0, 1 if device_view else 100)
+                if battery is not None and device_view:
+                    battery *= 100
                 result[identifier] = Device(
                     identifier, str(node.get("name") or f"CALMEAN {identifier}"),
-                    number(node.get("latitude"), -90, 90),
-                    number(node.get("longitude"), -180, 180),
-                    number(node.get("battery"), 0, 100),
+                    number(location.get("latitude"), -90, 90),
+                    number(location.get("longitude"), -180, 180),
+                    battery,
                     boolean(node.get("active")),
-                    str(node["localizationType"]) if node.get("localizationType") is not None else None,
-                    timestamp(node.get("createTime")),
+                    str(location["localizationType"]) if location.get("localizationType") is not None else None,
+                    timestamp(location.get("createTime")),
                 )
             else:
-                for value in node.values():
+                for key, value in node.items():
                     if isinstance(value, (dict, list)):
-                        visit(value)
+                        visit(value, device_view or key == "deviceView")
     visit(payload)
     if not result:
         raise InvalidResponse("No recognizable device records")

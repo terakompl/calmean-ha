@@ -48,8 +48,8 @@ Otwórz **Actions → Validate**. Testy Python i frontend, hassfest oraz HACS po
 
 Następnie **Releases → Draft a new release**:
 
-- Tag: `v0.2.1`, wskazujący sprawdzony commit.
-- Tytuł: `CALMEAN 0.2.1 — beta`.
+- Tag: `v0.2.3`, wskazujący sprawdzony commit.
+- Tytuł: `CALMEAN 0.2.3 — beta`.
 - Opis: funkcje, ograniczenia bety, instrukcja tokenu i wymagania HA.
 - Opublikuj pełne wydanie. Załącznik ZIP nie jest wymagany do zwykłej instalacji HACS.
 
@@ -78,3 +78,8 @@ Przy wcześniejszej instalacji ręcznej wykonaj kopię zapasową i pobierz przez
 - https://developers.home-assistant.io/docs/core/integration/brand_images/
 
 Ikona w paczce jest własną ikoną społecznościowego projektu, a nie oficjalnym logo CALMEAN. Lokalne ikony integracji są obsługiwane przez HA od 2026.3; starsza wersja HA może pokazać ikonę ogólną.
+
+
+## Parser 0.2.3
+
+Odpowiedź deviceView: współrzędne, typ i czas są odczytywane z localization. Bateria jest przeliczana z ułamka 0–1 na procenty. Wpisy DEVICE_PARENT / PARENT_APP są pomijane. Brak localization oznacza brak pozycji; lastActivityDate nie zastępuje czasu lokalizacji. Mapa pokazuje ostatnią pozycję API, bez wymuszania nowego odczytu zegarka.

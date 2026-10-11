@@ -1,6 +1,6 @@
 # Specyfikacja wymagań — CALMEAN dla Home Assistant
 
-Wersja: 0.2.1 beta. Nieoficjalna integracja społecznościowa; projekt nie jest produktem CALMEAN. Dystrybucja: publiczne repozytorium GitHub dodawane w HACS jako niestandardowe repozytorium typu Integracja.
+Wersja: 0.2.3 beta. Nieoficjalna integracja społecznościowa; projekt nie jest produktem CALMEAN. Dystrybucja: publiczne repozytorium GitHub dodawane w HACS jako niestandardowe repozytorium typu Integracja.
 
 ## Wymagania użytkownika
 
@@ -58,10 +58,15 @@ Tracker zwraca `home` w strefie typu Dom, nazwę pozostałej pasującej strefy i
 
 ## Wymagania dystrybucji
 
-Publiczne repozytorium GitHub z README, licencją MIT, hacs.json, manifest.json, opisem, tematami i włączonym Issues. Manifest musi wskazywać rzeczywistego właściciela, adres dokumentacji, zgłoszeń i codeowners. W katalogu integracji znajduje się ikona brand/icon.png. GitHub Actions uruchamia testy Python, frontend, hassfest i walidację HACS. Pełne wydanie GitHub z tagiem v0.2.1 jest zalecane; nie jest warunkiem samego dodania niestandardowego repozytorium.
+Publiczne repozytorium GitHub z README, licencją MIT, hacs.json, manifest.json, opisem, tematami i włączonym Issues. Manifest musi wskazywać rzeczywistego właściciela, adres dokumentacji, zgłoszeń i codeowners. W katalogu integracji znajduje się ikona brand/icon.png. GitHub Actions uruchamia testy Python, frontend, hassfest i walidację HACS. Pełne wydanie GitHub z tagiem v0.2.3 jest zalecane; nie jest warunkiem samego dodania niestandardowego repozytorium.
 
 Przed udostępnieniem: brak tokenów i danych osobowych, poprawna struktura repozytorium, zielone walidacje oraz rzeczywisty test pobrania przez HACS, restartu, konfiguracji i zapisu stref. Testy jednostkowe i DOM nie zastępują testu pełnego HA.
 
 ## Poza zakresem wersji
 
 Logowanie hasłem CALMEAN, automatyczne odnawianie tokenu, wiele kont, historia tras w osobnym panelu, mapy offline, wysyłanie poleceń do zegarków i gwarantowana dokładność pozycji GPS.
+
+
+## Parser 0.2.3
+
+Odpowiedź deviceView: współrzędne, typ i czas są odczytywane z localization. Bateria jest przeliczana z ułamka 0–1 na procenty. Wpisy DEVICE_PARENT / PARENT_APP są pomijane. Brak localization oznacza brak pozycji; lastActivityDate nie zastępuje czasu lokalizacji. Mapa pokazuje ostatnią pozycję API, bez wymuszania nowego odczytu zegarka.

@@ -20,6 +20,31 @@ class ModelTests(unittest.TestCase):
         records = [{'deviceId': 'demo-a'}, {'deviceId': 'demo-b'}]
         self.assertEqual(set(m.parse_devices({'data': records})), {'demo-a', 'demo-b'})
 
+    def test_verified_device_view_location_and_battery(self):
+        records = [dict(deviceId='demo-watch', deviceType='D31_WATCH', battery=0.3,
+                        active=True, localization=dict(latitude=0, longitude=1,
+                        localizationType='LBS', createTime='2026-01-01T02:00:00+0200')),
+                   dict(deviceId='demo-no-position', battery=0.01, active=False),
+                   dict(deviceId='demo-parent', deviceType='DEVICE_PARENT', battery=0.67)]
+        devices = m.parse_devices({'status': 'SUCCESS', 'deviceView': records})
+        self.assertEqual(set(devices), {'demo-watch', 'demo-no-position'})
+        watch = devices['demo-watch']
+        self.assertTrue(watch.has_position)
+        self.assertEqual((watch.latitude, watch.longitude), (0, 1))
+        self.assertEqual(watch.battery, 30)
+        self.assertEqual(watch.localization_type, 'LBS')
+        self.assertEqual(watch.updated_at, m.timestamp('2026-01-01T00:00:00Z'))
+        self.assertEqual(devices['demo-no-position'].battery, 1)
+        self.assertFalse(devices['demo-no-position'].has_position)
+
+    def test_device_view_battery_bounds_and_invalid_localization(self):
+        for raw, expected in [(0, 0), (1, 100), (0.67, 67), (None, None), (1.1, None)]:
+            device = m.parse_devices({'deviceView': [dict(deviceId='demo', battery=raw,
+                localization=None, lastActivityDate=1767225600000)]})['demo']
+            self.assertEqual(device.battery, expected)
+            self.assertIsNone(device.updated_at)
+            self.assertFalse(device.has_position)
+
     def test_zero_coordinates_are_valid(self):
         self.assertTrue(self.device().has_position)
 

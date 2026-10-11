@@ -41,6 +41,20 @@ const {randomUUID}=require('node:crypto');
   panel.$('add').click();assert.equal(panel.$('radius').value,'50');
   assert.match(panel.draft.id,/^[a-f0-9]{8}-[a-f0-9]{4}-4[a-f0-9]{3}-[89ab][a-f0-9]{3}-[a-f0-9]{12}$/);
   panel.$('name').value='Dziadkowie';
+  // Clicking a displayed point must preserve its geographic coordinates.
+  for(const center of [[52,17],[0,0],[-33,151],[10,-179.9],[10,179.9]]) {
+    panel.center=center;panel.zoom=17;
+    panel.clickPosition({clientX:830,clientY:413});
+    assert.ok(Math.abs(panel.draft.latitude-center[0])<1e-6);
+    assert.ok(Math.abs(panel.draft.longitude-center[1])<1e-6);
+    const point=[center[0]+0.0001,center[1]+0.0001];
+    const [x,y]=panel.screen(...point);
+    panel.clickPosition({clientX:330+x,clientY:63+y});
+    assert.ok(Math.abs(panel.draft.latitude-point[0])<1e-6);
+    assert.ok(Math.abs(panel.draft.longitude-point[1])<1e-6);
+  }
+  panel.center=[0,0];
+
   panel.clickPosition({clientX:930,clientY:413});
   panel.readDraft();assert.ok(Number.isFinite(panel.draft.longitude));
   const originalRadius=panel.shadowRoot.querySelector('circle[stroke-dasharray]').getAttribute('r');

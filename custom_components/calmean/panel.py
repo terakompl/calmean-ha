@@ -30,7 +30,7 @@ async def async_add_map_panel(hass):
     await panel_custom.async_register_panel(
         hass, frontend_url_path=PANEL_PATH, webcomponent_name='calmean-map-panel',
         sidebar_title='Mapa CALMEAN', sidebar_icon='mdi:map-marker-radius',
-        module_url='/calmean_static/calmean-map.js?v=0.2.1',
+        module_url='/calmean_static/calmean-map.js?v=0.2.3',
         require_admin=True,
     )
     hass.data[DOMAIN]['panel_registered'] = True

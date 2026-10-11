@@ -9,7 +9,7 @@ const project = (lat, lon, zoom) => {
 };
 const unproject = (x, y, zoom) => {
   const size = TILE * 2 ** zoom;
-  return [Math.max(-MAX_LAT, Math.min(MAX_LAT, Math.atan(Math.sinh(Math.PI * (1 - 2 * y / size))) * 180 / Math.PI)), ((x / size * 360 + 180) % 360 + 360) % 360 - 180];
+  return [Math.max(-MAX_LAT, Math.min(MAX_LAT, Math.atan(Math.sinh(Math.PI * (1 - 2 * y / size))) * 180 / Math.PI)), ((x / size * 360) % 360 + 360) % 360 - 180];
 };
 const validPosition = d => Number.isFinite(d.latitude) && Number.isFinite(d.longitude);
 const keyOf = d => JSON.stringify([d.entry_id, d.id]);

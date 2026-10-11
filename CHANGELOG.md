@@ -1,3 +1,15 @@
+# 0.2.3
+
+- Poprawiono przeliczanie długości geograficznej kliknięcia i przesuwania mapy: usunięto błędne przesunięcie o 180 stopni.
+- Nowy URL modułu mapy odświeża cache przeglądarki.
+- Istniejące błędnie zapisane strefy wymagają ponownego ustawienia.
+
+# 0.2.2
+
+- Obsługa deviceView/localization: współrzędne, typ i czas lokalizacji.
+- Bateria API 0–1 przeliczana na procenty.
+- Pomijanie aplikacji rodziców. Brak lokalizacji pozostaje nieznany.
+
 # Changelog
 
 ## 0.2.1
