@@ -1,0 +1,76 @@
+{
+  "title": "CALMEAN",
+  "config": {
+    "step": {
+      "user": {
+        "title": "CALMEAN",
+        "description": "Wklej token Bearer uzyskany ze swojego konta CALMEAN. Po dodaniu otwórz Konfiguruj, aby ustawić strefy.",
+        "data": {
+          "token": "Token Bearer"
+        }
+      },
+      "reauth_confirm": {
+        "title": "Nowy token",
+        "data": {
+          "token": "Token Bearer"
+        }
+      }
+    },
+    "error": {
+      "invalid_auth": "Token jest nieprawidłowy.",
+      "cannot_connect": "Nie można połączyć się z CALMEAN.",
+      "unsupported_response": "Nierozpoznany format odpowiedzi lub brak urządzeń.",
+      "invalid_zone": "Podaj punkt i promień 10–5000 m."
+    },
+    "abort": {
+      "single_instance_allowed": "Jedno konto CALMEAN jest już skonfigurowane.",
+      "reauth_successful": "Token został zaktualizowany."
+    }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "title": "Ustawienia CALMEAN",
+        "description": "Strefy każdego zegarka ustawisz w widoku Mapa CALMEAN w menu bocznym.",
+        "data": {
+          "interval": "Odświeżanie (sekundy)"
+        }
+      }
+    },
+    "error": {
+      "invalid_auth": "Token jest nieprawidłowy.",
+      "cannot_connect": "Nie można połączyć się z CALMEAN.",
+      "unsupported_response": "Nierozpoznany format odpowiedzi lub brak urządzeń.",
+      "invalid_zone": "Podaj punkt i promień 10–5000 m."
+    }
+  },
+  "selector": {
+    "method": {
+      "options": {
+        "map": "Pinezka na mapie",
+        "manual": "Współrzędne ręcznie"
+      }
+    }
+  },
+  "entity": {
+    "sensor": {
+      "battery": {
+        "name": "Bateria"
+      },
+      "localization_type": {
+        "name": "Typ lokalizacji"
+      },
+      "updated_at": {
+        "name": "Ostatnia lokalizacja"
+      },
+      "presence": {
+        "name": "Miejsce"
+      }
+    },
+    "binary_sensor": {
+      "active": {
+        "name": "Aktywność CALMEAN"
+      }
+    }
+  }
+}

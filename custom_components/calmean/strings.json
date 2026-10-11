@@ -1,0 +1,76 @@
+{
+  "title": "CALMEAN",
+  "config": {
+    "step": {
+      "user": {
+        "title": "CALMEAN",
+        "description": "Enter the Bearer token from your own CALMEAN account. After setup, open Configure to set zones.",
+        "data": {
+          "token": "Token Bearer"
+        }
+      },
+      "reauth_confirm": {
+        "title": "Replace token",
+        "data": {
+          "token": "Token Bearer"
+        }
+      }
+    },
+    "error": {
+      "invalid_auth": "Invalid token.",
+      "cannot_connect": "Cannot connect to CALMEAN.",
+      "unsupported_response": "Unsupported response format or no devices.",
+      "invalid_zone": "Enter a location and radius of 10–5000 m."
+    },
+    "abort": {
+      "single_instance_allowed": "A CALMEAN account is already configured.",
+      "reauth_successful": "Token updated."
+    }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "title": "CALMEAN settings",
+        "description": "Manage per-device zones in the CALMEAN Map sidebar panel.",
+        "data": {
+          "interval": "Polling interval (seconds)"
+        }
+      }
+    },
+    "error": {
+      "invalid_auth": "Invalid token.",
+      "cannot_connect": "Cannot connect to CALMEAN.",
+      "unsupported_response": "Unsupported response format or no devices.",
+      "invalid_zone": "Enter a location and radius of 10–5000 m."
+    }
+  },
+  "selector": {
+    "method": {
+      "options": {
+        "map": "Map pin",
+        "manual": "Manual coordinates"
+      }
+    }
+  },
+  "entity": {
+    "sensor": {
+      "battery": {
+        "name": "Battery"
+      },
+      "localization_type": {
+        "name": "Location type"
+      },
+      "updated_at": {
+        "name": "Last location"
+      },
+      "presence": {
+        "name": "Presence"
+      }
+    },
+    "binary_sensor": {
+      "active": {
+        "name": "CALMEAN activity"
+      }
+    }
+  }
+}
